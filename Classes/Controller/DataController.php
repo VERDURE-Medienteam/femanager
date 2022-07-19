@@ -10,11 +10,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class DataController extends ActionController
 {
-    protected $countryZonesDataProvider;
-
-    public function __construct(CountryZonesDataProvider $countryZonesDataProvider)
+    public function __construct(protected CountryZonesDataProvider $countryZonesDataProvider)
     {
-        $this->countryZonesDataProvider = $countryZonesDataProvider;
     }
 
     public function getStatesForCountryAction(string $country): ResponseInterface
@@ -25,6 +22,6 @@ class DataController extends ActionController
             $jsonData[$countryZone->getIsoCode()] = $countryZone->getLocalName();
         }
 
-        return $this->jsonResponse(json_encode($jsonData));
+        return $this->jsonResponse(json_encode($jsonData, JSON_THROW_ON_ERROR));
     }
 }

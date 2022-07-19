@@ -32,10 +32,6 @@ class UserOptions
         }
     }
 
-    /**
-     * @param array $params
-     * @return array
-     */
     protected function getUsers(array $params): array
     {
         $queryBuilder = ObjectUtility::getQueryBuilder(User::TABLE_NAME);
@@ -51,9 +47,6 @@ class UserOptions
 
     /**
      * Get lists of page uids where the users are stored with recursive setting
-     *
-     * @param array $params
-     * @return string
      */
     protected function getPageUidList(array $params): string
     {
@@ -67,10 +60,6 @@ class UserOptions
         return rtrim($list, ',');
     }
 
-    /**
-     * @param array $params
-     * @return array
-     */
     protected function getPages(array $params): array
     {
         $pages = [];

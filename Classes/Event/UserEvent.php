@@ -8,11 +8,8 @@ use In2code\Femanager\Domain\Model\User;
 
 class UserEvent
 {
-    protected $user;
-
-    public function __construct(?User $user)
+    public function __construct(protected ?User $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): ?User

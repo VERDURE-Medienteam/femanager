@@ -19,17 +19,17 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Inject a complete new content object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
+     * @var TypoScriptService
      */
     protected $typoScriptService;
 
@@ -48,25 +48,16 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $dataArray = [];
 
-    /**
-     * @param ContentObjectRenderer $contentObject
-     */
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
     }
 
-    /**
-     * @param ObjectManager $objectManager
-     */
     public function injectObjectManager(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
-    /**
-     * @param TypoScriptService $typoScriptService
-     */
     public function injectTypoScriptService(TypoScriptService $typoScriptService)
     {
         $this->typoScriptService = $typoScriptService;
@@ -121,7 +112,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Store properties for a table
      *
      * @param string $table
-     * @param StoreInDatabaseService $storeInDatabase
      */
     protected function setPropertiesForTable($table, StoreInDatabaseService $storeInDatabase)
     {
@@ -163,8 +153,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Add array to dataArray
-     *
-     * @param array $array
      */
     protected function addArrayToDataArray(array $array)
     {

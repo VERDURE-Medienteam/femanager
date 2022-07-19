@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\LogLevel;
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -28,24 +30,15 @@ class SendParametersService
     /**
      * @var array
      */
-    protected $configuration = [];
-
-    /**
-     * @var array
-     */
     protected $properties = [];
 
     /**
      * Constructor
      */
-    public function __construct($configuration)
+    public function __construct(protected $configuration)
     {
-        $this->configuration = $configuration;
     }
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
@@ -104,16 +97,11 @@ class SendParametersService
     protected function log()
     {
         if (!empty($this->configuration['debug'])) {
-            GeneralUtility::devLog(
-                'femanager sendpost values',
-                'femanager',
-                0,
-                [
-                    'url' => $this->getUri(),
-                    'data' => $this->getData(),
-                    'properties' => $this->properties
-                ]
-            );
+            GeneralUtility::makeInstance(LogManager::class)->getLogger(self::class)->log(LogLevel::INFO, 'femanager sendpost values', [
+                'url' => $this->getUri(),
+                'data' => $this->getData(),
+                'properties' => $this->properties
+            ]);
         }
     }
 
@@ -128,8 +116,6 @@ class SendParametersService
 
     /**
      * Initialize
-     *
-     * @param User $user
      */
     protected function initialize(User $user)
     {

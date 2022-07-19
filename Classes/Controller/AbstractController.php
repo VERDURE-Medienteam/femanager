@@ -39,36 +39,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractController extends ActionController
 {
     /**
-     * @var \In2code\Femanager\Domain\Repository\UserRepository
-     */
-    protected $userRepository;
-
-    /**
-     * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
-     */
-    protected $userGroupRepository;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     */
-    protected $persistenceManager;
-
-    /**
-     * @var \In2code\Femanager\Domain\Service\SendMailService
-     */
-    protected $sendMailService;
-
-    /**
-     * @var \In2code\Femanager\Finisher\FinisherRunner
-     */
-    protected $finisherRunner;
-
-    /**
-     * @var \In2code\Femanager\Utility\LogUtility
-     */
-    protected $logUtility;
-
-    /**
      * Content Object
      *
      * @var ContentObjectRenderer
@@ -120,34 +90,20 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
-     * @param \In2code\Femanager\Domain\Repository\UserRepository $userRepository
-     * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
-     * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
-     * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
-     * @param \In2code\Femanager\Utility\LogUtility $logUtility
+     * @param UserRepository $userRepository
+     * @param UserGroupRepository $userGroupRepository
+     * @param PersistenceManager $persistenceManager
+     * @param SendMailService $sendMailService
+     * @param FinisherRunner $finisherRunner
+     * @param LogUtility $logUtility
      */
-    public function __construct(
-        UserRepository $userRepository,
-        UserGroupRepository $userGroupRepository,
-        PersistenceManager $persistenceManager,
-        SendMailService $sendMailService,
-        FinisherRunner $finisherRunner,
-        LogUtility $logUtility
-    ) {
-        $this->userRepository = $userRepository;
-        $this->userGroupRepository = $userGroupRepository;
-        $this->persistenceManager = $persistenceManager;
-        $this->sendMailService = $sendMailService;
-        $this->finisherRunner = $finisherRunner;
-        $this->logUtility = $logUtility;
+    public function __construct(protected UserRepository $userRepository, protected UserGroupRepository $userGroupRepository, protected PersistenceManager $persistenceManager, protected SendMailService $sendMailService, protected FinisherRunner $finisherRunner, protected LogUtility $logUtility)
+    {
     }
 
     /**
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
-     *
-     * @param User $user
      */
     public function createAllConfirmed(User $user)
     {
@@ -160,8 +116,6 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to updateAction()
      *        Update Confirmation from Admin is not necessary
-     *
-     * @param User $user
      */
     public function updateAllConfirmed(User $user)
     {
@@ -229,10 +183,8 @@ abstract class AbstractController extends ActionController
      * Some additional actions after profile creation
      *
      * @param User $user
-     * @param string $action
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
-     * @param string $status
      * @param bool $backend Don't redirect if called from backend action
      */
     public function finalCreate(
@@ -292,7 +244,6 @@ abstract class AbstractController extends ActionController
     /**
      * Log user in
      *
-     * @param User $user
      * @param $login
      * @throws IllegalObjectTypeException
      */
@@ -403,7 +354,7 @@ abstract class AbstractController extends ActionController
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
-                'jsLabels' => json_encode($jsLabels),
+                'jsLabels' => json_encode($jsLabels, JSON_THROW_ON_ERROR),
             ]
         );
     }
@@ -502,7 +453,7 @@ abstract class AbstractController extends ActionController
 
     protected function setAllUserGroups()
     {
-        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $controllerName = strtolower((string) $this->controllerContext->getRequest()->getControllerName());
         $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
@@ -510,7 +461,6 @@ abstract class AbstractController extends ActionController
     /**
      * Send email to user for confirmation
      *
-     * @param User $user
      * @throws UnsupportedRequestTypeException
      */
     public function sendCreateUserConfirmationMail(User $user)

@@ -224,7 +224,7 @@ class ClientsideValidator extends AbstractValidator
                         $wordHash = $wordObject->getWordHash();
                         $userVal = md5(strtolower(utf8_decode($this->getValue())));
                         if ($wordHash !== $userVal) {
-                            $this->addMessage('validationErrorCaptcha', 'captcha');
+                            $this->addMessage('validationErrorCaptcha');
                             $this->isValid = false;
                         }
                     }
@@ -253,8 +253,6 @@ class ClientsideValidator extends AbstractValidator
      * This function checks the given validation string from user input against settings in TypoScript. If both strings
      * do not match, it could be possible that there is a manipulation. In this case, we stop validation and return a
      * global error message
-     *
-     * @return bool
      */
     protected function isValidationSettingsDifferentToGlobalSettings(): bool
     {
@@ -282,9 +280,6 @@ class ClientsideValidator extends AbstractValidator
         return $this->validationSettingsString;
     }
 
-    /**
-     * @return string
-     */
     public function getValidationSettingsFromTypoScript(): string
     {
         $controllerName = $this->getControllerName();
@@ -297,13 +292,10 @@ class ClientsideValidator extends AbstractValidator
         return $validationService->getValidationStringForField($this->fieldName);
     }
 
-    /**
-     * @return array
-     */
     protected function getValidationSettings(): array
     {
         $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
-        $validationSettings = str_replace('|', ',', $validationSettings);
+        $validationSettings = str_replace('|', ',', (string) $validationSettings);
 
         return $validationSettings;
     }
@@ -376,7 +368,6 @@ class ClientsideValidator extends AbstractValidator
     }
 
     /**
-     * @param User $user
      * @return ClientsideValidator
      */
     public function setUser(User $user = null)
@@ -413,16 +404,12 @@ class ClientsideValidator extends AbstractValidator
         return $this->additionalValue;
     }
 
-    /**
-     * @return int
-     */
     public function getPlugin(): int
     {
         return $this->plugin;
     }
 
     /**
-     * @param int $plugin
      * @return ClientsideValidator
      */
     public function setPlugin(int $plugin)
@@ -432,16 +419,12 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getActionName(): string
     {
         return $this->actionName;
     }
 
     /**
-     * @param string $actionName
      * @return ClientsideValidator
      */
     public function setActionName(string $actionName)
@@ -451,9 +434,6 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     protected function getValidationName(): string
     {
         $validationName = 'validation';
@@ -464,9 +444,6 @@ class ClientsideValidator extends AbstractValidator
         return $validationName;
     }
 
-    /**
-     * @return string
-     */
     protected function getControllerName(): string
     {
         $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);

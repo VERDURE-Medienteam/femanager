@@ -13,10 +13,6 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 class DateConverter extends AbstractDataProcessor
 {
 
-    /**
-     * @param array $arguments
-     * @return array
-     */
     public function process(array $arguments): array
     {
         if (!empty($this->controllerArguments['user'])) {

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Finisher\FinisherInterface;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Finisher\AbstractFinisher;
 use In2code\Femanager\Utility\StringUtility;
@@ -14,11 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class FinisherService
 {
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
 
     /**
      * Classname
@@ -61,10 +57,10 @@ class FinisherService
     /**
      * @var string
      */
-    protected $finisherInterface = 'In2code\Femanager\Finisher\FinisherInterface';
+    protected $finisherInterface = FinisherInterface::class;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -218,13 +214,11 @@ class FinisherService
 
     /**
      * Call methods in finisher class
-     *
-     * @param AbstractFinisher $finisher
      */
     protected function callFinisherMethods(AbstractFinisher $finisher)
     {
         foreach (get_class_methods($finisher) as $method) {
-            if (!StringUtility::endsWith($method, 'Finisher') || strpos($method, 'initialize') === 0) {
+            if (!StringUtility::endsWith($method, 'Finisher') || str_starts_with((string) $method, 'initialize')) {
                 continue;
             }
             $this->callInitializeFinisherMethod($finisher, $method);
@@ -235,7 +229,6 @@ class FinisherService
     /**
      * Call initializeFinisherMethods like "initializeSaveFinisher()"
      *
-     * @param AbstractFinisher $finisher
      * @param string $finisherMethod
      */
     protected function callInitializeFinisherMethod(AbstractFinisher $finisher, $finisherMethod)
@@ -250,10 +243,9 @@ class FinisherService
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
      */
-    public function __construct(User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function __construct(User $user, array $settings, protected ContentObjectRenderer $contentObject)
     {
         $this->setUser($user);
         $this->setSettings($settings);
-        $this->contentObject = $contentObject;
     }
 }

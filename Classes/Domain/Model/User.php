@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class User extends FrontendUser
 {
-    const TABLE_NAME = 'fe_users';
+    final const TABLE_NAME = 'fe_users';
 
     /**
      * @var string
@@ -280,8 +280,6 @@ class User extends FrontendUser
 
     /**
      * Returns, whether the user has accepted terms and conditions
-     *
-     * @return bool
      */
     public function isTerms(): bool
     {
@@ -291,7 +289,6 @@ class User extends FrontendUser
     /**
      * Set whether the user has accepted terms and conditions
      *
-     * @param bool $terms
      * @return User
      */
     public function setTerms(bool $terms)
@@ -323,9 +320,6 @@ class User extends FrontendUser
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsOnline(): bool
     {
         return $this->isOnline();
@@ -333,8 +327,6 @@ class User extends FrontendUser
 
     /**
      * Check if last FE login was within the last 2h
-     *
-     * @return bool
      */
     public function isOnline(): bool
     {

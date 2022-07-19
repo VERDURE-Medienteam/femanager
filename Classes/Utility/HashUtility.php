@@ -16,7 +16,6 @@ class HashUtility extends AbstractUtility
      * Check if given hash is correct
      *
      * @param string $hash
-     * @param User $user
      * @return bool
      */
     public static function validHash($hash, User $user)
@@ -27,7 +26,6 @@ class HashUtility extends AbstractUtility
     /**
      * Create hash for a user
      *
-     * @param User $user
      * @return string
      */
     public static function createHashForUser(User $user)
@@ -44,6 +42,6 @@ class HashUtility extends AbstractUtility
      */
     protected static function hashString($string, $length = 16)
     {
-        return GeneralUtility::shortMD5($string . self::getEncryptionKey(), $length);
+        return substr(md5($string . self::getEncryptionKey()), 0, $length);
     }
 }

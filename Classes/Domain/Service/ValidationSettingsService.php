@@ -13,20 +13,6 @@ class ValidationSettingsService
 {
 
     /**
-     * Needed for validation settings. Should be "new", "edit" or "invitation"
-     *
-     * @var string
-     */
-    protected $controllerName = '';
-
-    /**
-     * Needed for validation settings. Should be "validation" or "validationEdit"
-     *
-     * @var string
-     */
-    protected $validationName = '';
-
-    /**
      * Validation names with simple configuration
      *
      * @var array
@@ -46,10 +32,8 @@ class ValidationSettingsService
      * @param string $controllerName
      * @param string $validationName
      */
-    public function __construct(string $controllerName, string $validationName)
+    public function __construct(protected string $controllerName, protected string $validationName)
     {
-        $this->controllerName = $controllerName;
-        $this->validationName = $validationName;
     }
 
     /**
@@ -59,7 +43,6 @@ class ValidationSettingsService
      *        mustInclude(number|letter|special), inList(1|2|3)
      *
      * @param string $fieldName Fieldname
-     * @return string
      */
     public function getValidationStringForField(string $fieldName): string
     {
@@ -76,10 +59,6 @@ class ValidationSettingsService
         return $string;
     }
 
-    /**
-     * @param string $type
-     * @return bool
-     */
     public function isValidationEnabled(string $type = 'client'): bool
     {
         return $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] === '1';
@@ -107,7 +86,6 @@ class ValidationSettingsService
      * Check if validation is simple or extended
      *
      * @param string $validation
-     * @return bool
      */
     protected function isSimpleValidation($validation): bool
     {
@@ -117,9 +95,6 @@ class ValidationSettingsService
         return false;
     }
 
-    /**
-     * @return array
-     */
     protected function getSettings(): array
     {
         $configurationManager = ObjectUtility::getObjectManager()->get(ConfigurationManagerInterface::class);

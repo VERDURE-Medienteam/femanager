@@ -12,9 +12,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class IsConfirmationModuleActivatedViewHelper extends AbstractViewHelper
 {
 
-    /**
-     * @return bool
-     */
     public function render(): bool
     {
         return ConfigurationUtility::isConfirmationModuleActive();

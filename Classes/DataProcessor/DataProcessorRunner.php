@@ -58,11 +58,6 @@ class DataProcessorRunner
     /**
      * Call classes after submit but before action
      *
-     * @param array $arguments
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
-     * @param Arguments $controllerArguments
-     * @return array
      * @throws \Exception
      */
     public function callClasses(
@@ -102,7 +97,6 @@ class DataProcessorRunner
      * Get all classes to this event from typoscript and sort them
      *
      * @param array $settings
-     * @return array
      */
     protected function getClasses($settings): array
     {

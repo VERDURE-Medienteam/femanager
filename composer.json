@@ -24,7 +24,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": "^7.4",
+    "php": "^8.1",
     "ext-json": "*",
     "ext-pdo": "*",
     "typo3/cms-core": "^11.5",
@@ -70,7 +70,6 @@
     "drevops/behat-screenshot": "^1.1",
     "friends-of-behat/mink-browserkit-driver": "^1.6",
     "sjbr/static-info-tables": "^11.5"
-
   },
   "autoload": {
     "psr-4": {
@@ -123,7 +122,6 @@
   },
   "extra": {
     "typo3/cms": {
-      "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/Web",
       "extension-key": "femanager"
     }

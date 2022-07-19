@@ -19,7 +19,6 @@ class ServersideValidator extends AbstractValidator
      * Validation of given Params
      *
      * @param User $user
-     * @return bool
      */
     public function isValid($user): bool
     {
@@ -332,8 +331,6 @@ class ServersideValidator extends AbstractValidator
     /**
      * @param $user
      * @param $fieldName
-     * @param array $validationSettings
-     * @return bool
      */
     protected function shouldBeValidated($user, $fieldName, array $validationSettings): bool
     {
@@ -369,9 +366,6 @@ class ServersideValidator extends AbstractValidator
         return $value;
     }
 
-    /**
-     * @return bool
-     */
     protected function propertyHasGetterMethod($user, $fieldName): bool
     {
         try {

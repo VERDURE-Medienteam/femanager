@@ -47,7 +47,7 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
                 1638341334
             );
         }
-        $controllerName = strtolower($this->renderingContext->getRequest()->getControllerName());
+        $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
         $contentObject = $this->configurationManager->getContentObject();
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT

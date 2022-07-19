@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
@@ -55,10 +56,9 @@ class EditController extends AbstractFrontendController
     }
 
     /**
-     * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
     public function updateAction(User $user)
     {
@@ -109,8 +109,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update confirmation
-     *
-     * @param User $user
      */
     protected function statusConfirm(User $user)
     {
@@ -135,8 +133,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update refused
-     *
-     * @param User $user
      */
     protected function statusRefuse(User $user)
     {
@@ -157,8 +153,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * action delete
-     *
-     * @param User $user
      */
     public function deleteAction(User $user)
     {
@@ -189,7 +183,6 @@ class EditController extends AbstractFrontendController
     /**
      * Check: If there are no changes, simple redirect back
      *
-     * @param User $user
      * @throws UnsupportedRequestTypeException
      */
     protected function redirectIfDirtyObject(User $user)
@@ -200,9 +193,6 @@ class EditController extends AbstractFrontendController
         }
     }
 
-    /**
-     * @param User $user
-     */
     protected function emailForUsername(User $user)
     {
         if ($this->settings['edit']['fillEmailWithUsername'] === '1') {

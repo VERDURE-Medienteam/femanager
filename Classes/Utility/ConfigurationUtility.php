@@ -13,9 +13,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 class ConfigurationUtility extends AbstractUtility
 {
 
-    /**
-     * @return bool
-     */
     public static function isDisableModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -23,9 +20,6 @@ class ConfigurationUtility extends AbstractUtility
         return $configuration['disableModule'] === '1';
     }
 
-    /**
-     * @return bool
-     */
     public static function isConfirmationModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -33,9 +27,6 @@ class ConfigurationUtility extends AbstractUtility
         return $configuration['enableConfirmationModule'] === '1';
     }
 
-    /**
-     * @return bool
-     */
     public static function isDisableLogActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -66,7 +57,6 @@ class ConfigurationUtility extends AbstractUtility
     }
 
     /**
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function isBackendModuleFilterUserConfirmation(): bool
@@ -78,7 +68,6 @@ class ConfigurationUtility extends AbstractUtility
     }
 
     /**
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function IsResendUserConfirmationRequestActive(): bool

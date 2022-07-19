@@ -27,11 +27,6 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
 
     /**
      * Get an URI for backend edit
-     *
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
      */
     public static function renderStatic(
         array $arguments,

@@ -18,12 +18,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Inject a complete new content object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -34,17 +34,11 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param ContentObjectRenderer $contentObject
-     */
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;

@@ -65,7 +65,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
                     1638341673
                 );
             }
-            $controllerName = strtolower($this->renderingContext->getRequest()->getControllerName());
+            $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
             $contentObject = $this->configurationManager->getContentObject();
             $typoScript = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
@@ -91,6 +91,6 @@ class SelectViewHelper extends OriginalSelectViewHelper
     protected function getFieldName()
     {
         preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
-        return str_replace(['[', ']'], '', $name[0][0]);
+        return str_replace(['[', ']'], '', (string) $name[0][0]);
     }
 }

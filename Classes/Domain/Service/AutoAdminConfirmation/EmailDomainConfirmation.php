@@ -11,9 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailDomainConfirmation extends AbstractConfirmation
 {
 
-    /**
-     * @return bool
-     */
     public function isAutoConfirmed(): bool
     {
         if (!$this->isException() && $this->isGivenDomainsPartOfEmail()) {
@@ -22,14 +19,11 @@ class EmailDomainConfirmation extends AbstractConfirmation
         return false;
     }
 
-    /**
-     * @return bool
-     */
     protected function isGivenDomainsPartOfEmail(): bool
     {
         $domains = GeneralUtility::trimExplode(',', $this->getConfig()['confirmByEmailDomains'], true);
         foreach ($domains as $domain) {
-            if (stristr($this->getEmailDomain(), $domain)) {
+            if (stristr($this->getEmailDomain(), (string) $domain)) {
                 return true;
             }
         }
@@ -45,8 +39,6 @@ class EmailDomainConfirmation extends AbstractConfirmation
 
     /**
      * Get domain of an email address: "alex@in2code.de" => "in2code.de"
-     *
-     * @return string
      */
     protected function getEmailDomain(): string
     {

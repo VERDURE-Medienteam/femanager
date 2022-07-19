@@ -94,7 +94,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             }
             return !empty($value);
         }
-        if ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
+        if ((is_countable($value)) && count($value) > 0) {
             return true;
         }
         if ($value instanceof \DateTime) {
@@ -308,7 +308,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsNumber($value)
     {
-        return strlen(preg_replace('/[^0-9]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
@@ -319,7 +319,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsLetter($value)
     {
-        return strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
@@ -330,7 +330,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsUppercase($value)
     {
-        return strlen(preg_replace('/[^A-Z]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
@@ -341,7 +341,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpecialCharacter($value)
     {
-        return strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
+        return strlen((string) preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**
@@ -352,7 +352,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpaceCharacter($value)
     {
-        return strpos($value, ' ') !== false;
+        return str_contains($value, ' ');
     }
 
     /**

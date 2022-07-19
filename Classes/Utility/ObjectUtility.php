@@ -18,26 +18,16 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class ObjectUtility extends AbstractUtility
 {
 
-    /**
-     * @param string $tableName
-     * @return QueryBuilder
-     */
     public static function getQueryBuilder(string $tableName): QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
     public static function getObjectManager(): ObjectManagerInterface
     {
         return parent::getObjectManager();
     }
 
-    /**
-     * @return ContentObjectRenderer
-     */
     public static function getContentObject(): ContentObjectRenderer
     {
         return self::getObjectManager()->get(ContentObjectRenderer::class);
@@ -47,7 +37,6 @@ class ObjectUtility extends AbstractUtility
      * Checks if object was changed or not
      *
      * @param object $object
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function isDirtyObject($object): bool
@@ -55,7 +44,7 @@ class ObjectUtility extends AbstractUtility
         foreach (array_keys($object->_getProperties()) as $propertyName) {
             try {
                 $property = ObjectAccess::getProperty($object, $propertyName);
-            } catch (PropertyNotAccessibleException $e) {
+            } catch (PropertyNotAccessibleException) {
                 // if property can not be accessed
                 continue;
             }
@@ -87,7 +76,6 @@ class ObjectUtility extends AbstractUtility
      * @param ObjectStorage $objectStorage
      * @param string $property
      * @param string $glue
-     * @return string
      */
     public static function implodeObjectStorageOnProperty($objectStorage, $property = 'uid', $glue = ', '): string
     {

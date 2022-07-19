@@ -14,21 +14,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class AutoAdminConfirmationService
 {
     /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @var string
      */
     protected $confirmInterface = ConfirmationInterface::class;
@@ -40,17 +25,12 @@ class AutoAdminConfirmationService
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
      */
-    public function __construct(User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function __construct(protected User $user, protected array $settings, protected ContentObjectRenderer $contentObject)
     {
-        $this->user = $user;
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
     }
 
     /**
      * Loop through all AutoAdminConfirmation classes
-     *
-     * @return bool
      */
     public function isAutoAdminConfirmationFullfilled(): bool
     {
@@ -72,7 +52,6 @@ class AutoAdminConfirmationService
     }
 
     /**
-     * @return array
      * @throws \Exception
      */
     protected function getConfirmationClasses(): array

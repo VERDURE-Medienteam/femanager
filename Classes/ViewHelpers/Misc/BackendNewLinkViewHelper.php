@@ -26,11 +26,6 @@ class BackendNewLinkViewHelper extends AbstractViewHelper
 
     /**
      * Get an URI for new records in backend
-     *
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
      */
     public static function renderStatic(
         array $arguments,

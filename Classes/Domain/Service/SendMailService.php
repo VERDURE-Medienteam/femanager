@@ -27,27 +27,13 @@ class SendMailService
     public $contentObject;
 
     /**
-     * @var Mailer
-     */
-    private $mailer;
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $dispatcher;
-
-    /**
      * SendMailService constructor.
      */
-    public function __construct(Mailer $mailer, EventDispatcherInterface $dispatcher)
+    public function __construct(private readonly Mailer $mailer, private readonly EventDispatcherInterface $dispatcher)
     {
         $this->contentObject = ObjectUtility::getContentObject();
-        $this->mailer = $mailer;
-        $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * @param array $variables
-     */
     protected function contentObjectStart(array $variables)
     {
         if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
@@ -111,12 +97,6 @@ class SendMailService
         return $standAloneView->render();
     }
 
-    /**
-     * @param array $variables
-     * @param array $typoScript
-     * @param MailMessage $email
-     * @return array
-     */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
         $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']);
@@ -139,14 +119,6 @@ class SendMailService
         return array_merge($variables, ['embedImages' => $imageVariables]);
     }
 
-    /**
-     * @param string $template
-     * @param array $receiver
-     * @param array $sender
-     * @param string $subject
-     * @param array $variables
-     * @param MailMessage $email
-     */
     protected function prepareMailObject(
         string $template,
         array $receiver,
@@ -163,10 +135,6 @@ class SendMailService
             ->html($html);
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['receiver.']['email'], $typoScript['receiver.']['email.'])
@@ -184,10 +152,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function overwriteEmailSender(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['sender.']['email'], $typoScript['sender.']['email.']) &&
@@ -205,10 +169,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setSubject(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.'])) {
@@ -216,10 +176,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setCc(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
@@ -227,10 +183,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setPriority(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])) {
@@ -238,10 +190,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setAttachments(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.'])) {
@@ -267,11 +215,6 @@ class SendMailService
         return TemplateUtility::getTemplatePath('Email/' . ucfirst($fileName) . '.html');
     }
 
-    /**
-     * @param array $typoScript
-     * @param array $receiver
-     * @return bool
-     */
     protected function isMailEnabled(array $typoScript, array $receiver): bool
     {
         return $this->contentObject->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])

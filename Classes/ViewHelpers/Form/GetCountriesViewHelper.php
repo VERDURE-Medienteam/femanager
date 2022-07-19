@@ -270,8 +270,6 @@ class GetCountriesViewHelper extends AbstractViewHelper
 
     /**
      * Build an country array
-     *
-     * @return array
      */
     public function render(): array
     {

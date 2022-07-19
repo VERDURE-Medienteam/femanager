@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
@@ -84,7 +85,6 @@ class UserUtility extends AbstractUtility
     /**
      * Autogenerate username and password if it's empty
      *
-     * @param User $user
      * @return User $user
      */
     public static function fallbackUsernameAndPassword(User $user)
@@ -121,8 +121,6 @@ class UserUtility extends AbstractUtility
     }
 
     /**
-     * @param User $user
-     * @param array $settings
      * @return User
      */
     public static function takeEmailAsUsername(User $user, array $settings)
@@ -137,7 +135,6 @@ class UserUtility extends AbstractUtility
     /**
      * Overwrite usergroups from user by flexform settings
      *
-     * @param User $user
      * @param array $settings
      * @param string $controllerName
      * @return User $object
@@ -160,9 +157,8 @@ class UserUtility extends AbstractUtility
     /**
      * Convert password to Argon2i, Bcrypt, Pbkdf2, Phpass, Blowfish or Md5 hash
      *
-     * @param User $user
      * @param string $method
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
+     * @throws InvalidPasswordHashException
      */
     public static function convertPassword(User $user, $method)
     {
@@ -174,9 +170,8 @@ class UserUtility extends AbstractUtility
     /**
      * Hash a password from $user->getPassword()
      *
-     * @param User $user
      * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
+     * @throws InvalidPasswordHashException
      */
     public static function hashPassword(User &$user, $method)
     {
@@ -225,7 +220,6 @@ class UserUtility extends AbstractUtility
     /**
      * Get changed properties (compare two objects with same getter methods)
      *
-     * @param User $changedObject
      * @return array
      *            [firstName][old] = Alex
      *            [firstName][new] = Alexander
@@ -251,7 +245,7 @@ class UserUtility extends AbstractUtility
                         $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
                     }
                 } else {
-                    if (get_class($oldPropertyValue) === 'DateTime') {
+                    if ($oldPropertyValue::class === \DateTime::class) {
                         /** @var $oldPropertyValue \DateTime */
                         /** @var $newPropertyValue \DateTime */
                         if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
@@ -299,8 +293,6 @@ class UserUtility extends AbstractUtility
 
     /**
      * Remove FE Session to a given user
-     *
-     * @param User $user
      */
     public static function removeFrontendSessionToUser(User $user)
     {
@@ -313,7 +305,6 @@ class UserUtility extends AbstractUtility
     /**
      * Check if FE Session exists
      *
-     * @param User $user
      * @return bool
      */
     public static function checkFrontendSessionToUser(User $user)
@@ -334,7 +325,6 @@ class UserUtility extends AbstractUtility
     /**
      * Login FE-User
      *
-     * @param User $user
      * @param string|null $storagePids
      */
     public static function login(User $user, $storagePids = null)

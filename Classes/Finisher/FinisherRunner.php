@@ -16,16 +16,6 @@ class FinisherRunner
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     */
-    protected $configurationManager;
-
-    /**
      * @var ContentObjectRenderer
      */
     protected $contentObject;
@@ -39,24 +29,18 @@ class FinisherRunner
 
     /**
      * FinisherRunner constructor.
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @param ObjectManagerInterface $objectManager
+     * @param ConfigurationManagerInterface $configurationManager
      */
-    public function __construct(
-        ObjectManagerInterface $objectManager,
-        ConfigurationManagerInterface $configurationManager
-    ) {
-        $this->objectManager = $objectManager;
-        $this->configurationManager = $configurationManager;
+    public function __construct(protected ObjectManagerInterface $objectManager, protected ConfigurationManagerInterface $configurationManager)
+    {
     }
 
     /**
      * Call finisher classes after submit
      *
-     * @param User $user
      * @param string $actionMethodName
      * @param array $settings
-     * @param ContentObjectRenderer $contentObject
      */
     public function callFinishers(
         User $user,

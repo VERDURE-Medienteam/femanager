@@ -15,9 +15,7 @@ use TYPO3\CMS\Core\Service\FlexFormService;
  */
 class PluginRepository
 {
-    const TABLE_NAME = 'tt_content';
-
-    protected FlexFormService $flexFormService;
+    final const TABLE_NAME = 'tt_content';
 
     /**
      * @var array<string, string>
@@ -32,14 +30,11 @@ class PluginRepository
     /**
      * @param FlexFormService $flexFormService
      */
-    public function __construct(FlexFormService $flexFormService)
+    public function __construct(protected FlexFormService $flexFormService)
     {
-        $this->flexFormService = $flexFormService;
     }
 
     /**
-     * @param int $contentIdentifier
-     * @return string
      * @throws \Exception
      * @throws Exception
      */
@@ -64,8 +59,6 @@ class PluginRepository
 
     /**
      * @param string $view can be "new", "edit" or "invitation"
-     * @param int $pageIdentifier
-     * @return bool
      * @throws \Exception
      * @throws Exception
      */
@@ -96,10 +89,6 @@ class PluginRepository
         return false;
     }
 
-    /**
-     * @param string $flexForm
-     * @return string
-     */
     protected function getViewFromFlexForm(string $flexForm): string
     {
         $view = '';
@@ -115,9 +104,6 @@ class PluginRepository
     }
 
     /**
-     * @param string $view
-     * @param string $pluginConfiguration
-     * @return bool
      * @throws LogicException
      */
     protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool

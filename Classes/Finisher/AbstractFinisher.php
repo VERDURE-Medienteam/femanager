@@ -39,11 +39,6 @@ abstract class AbstractFinisher implements FinisherInterface
     protected $actionMethodName;
 
     /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @return User
      */
     public function getUser()
@@ -128,12 +123,11 @@ abstract class AbstractFinisher implements FinisherInterface
         array $configuration,
         array $settings,
         $actionMethodName,
-        ContentObjectRenderer $contentObject
+        protected ContentObjectRenderer $contentObject
     ) {
         $this->setUser($user);
         $this->setConfiguration($configuration);
         $this->setSettings($settings);
         $this->setActionMethodName($actionMethodName);
-        $this->contentObject = $contentObject;
     }
 }

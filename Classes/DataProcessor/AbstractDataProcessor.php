@@ -15,26 +15,6 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
 {
 
     /**
-     * @var array
-     */
-    protected $configuration = [];
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var ContentObjectRenderer|null
-     */
-    protected $contentObject;
-
-    /**
-     * @var Arguments|null
-     */
-    protected $controllerArguments;
-
-    /**
      * AbstractDataProcessor constructor.
      *
      * @param array $configuration
@@ -42,16 +22,8 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
      * @param ContentObjectRenderer $contentObject
      * @param Arguments $controllerArguments
      */
-    public function __construct(
-        array $configuration,
-        array $settings,
-        ContentObjectRenderer $contentObject,
-        Arguments $controllerArguments
-    ) {
-        $this->configuration = $configuration;
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
-        $this->controllerArguments = $controllerArguments;
+    public function __construct(protected array $configuration, protected array $settings, protected ?ContentObjectRenderer $contentObject, protected ?Arguments $controllerArguments)
+    {
     }
 
     public function initializeDataProcessor()
@@ -59,7 +31,6 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
     }
 
     /**
-     * @param string $path
      * @return mixed
      */
     public function getConfiguration(string $path = '')

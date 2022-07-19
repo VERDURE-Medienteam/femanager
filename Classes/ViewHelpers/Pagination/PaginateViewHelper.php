@@ -39,10 +39,6 @@ class PaginateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
      * @throws NotPaginatableException
      */
     public static function renderStatic(
@@ -65,9 +61,6 @@ class PaginateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param RenderingContextInterface $renderingContext
-     * @return PaginationInterface
      * @throws NotPaginatableException
      */
     protected static function getPagination(
@@ -79,9 +72,6 @@ class PaginateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param RenderingContextInterface $renderingContext
-     * @return PaginatorInterface
      * @throws NotPaginatableException
      * @throws FluidViewHelperException
      */
@@ -105,9 +95,6 @@ class PaginateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param RenderingContextInterface $renderingContext
-     * @return int
      * @throws FluidViewHelperException
      */
     protected static function getPageNumber(array $arguments, RenderingContextInterface $renderingContext): int
@@ -131,10 +118,6 @@ class PaginateViewHelper extends AbstractViewHelper
         return 1;
     }
 
-    /**
-     * @param array $arguments
-     * @return string
-     */
     protected static function getName(array $arguments): string
     {
         return $arguments['name'] ?: $arguments['as'];
