@@ -21,17 +21,17 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      *
      * @var ContentObjectRenderer
      */
-    protected $contentObject;
+    protected ContentObjectRenderer $contentObject;
 
     /**
      * @var ObjectManager
      */
-    protected $objectManager;
+    protected ObjectManager $objectManager;
 
     /**
      * @var TypoScriptService
      */
-    protected $typoScriptService;
+    protected TypoScriptService $typoScriptService;
 
     /**
      * @var array

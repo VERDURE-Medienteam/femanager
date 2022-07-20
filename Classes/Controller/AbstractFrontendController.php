@@ -9,7 +9,7 @@ abstract class AbstractFrontendController extends AbstractController
     /**
      * @var RatelimiterService
      */
-    protected $ratelimiterService;
+    protected RatelimiterService $ratelimiterService;
 
     public function injectRatelimiterService(RatelimiterService $ratelimiterService): void
     {

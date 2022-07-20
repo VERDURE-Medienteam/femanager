@@ -48,7 +48,7 @@ class Log extends AbstractEntity
      *
      * @var User
      */
-    protected $user;
+    protected User $user;
 
     /**
      * @param string $title

@@ -18,7 +18,7 @@ class FinisherRunner
     /**
      * @var ContentObjectRenderer
      */
-    protected $contentObject;
+    protected ContentObjectRenderer $contentObject;
 
     /**
      * TypoScript settings

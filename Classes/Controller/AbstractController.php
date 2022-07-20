@@ -43,7 +43,7 @@ abstract class AbstractController extends ActionController
      *
      * @var ContentObjectRenderer
      */
-    public $contentObject;
+    public ContentObjectRenderer $contentObject;
 
     /**
      * Former known as piVars

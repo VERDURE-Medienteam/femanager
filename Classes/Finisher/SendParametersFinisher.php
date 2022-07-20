@@ -20,12 +20,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      *
      * @var ContentObjectRenderer
      */
-    protected $contentObject;
+    protected ContentObjectRenderer $contentObject;
 
     /**
      * @var ConfigurationManagerInterface
      */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
     /**
      * TypoScript configuration part sendPost
