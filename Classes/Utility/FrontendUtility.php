@@ -27,7 +27,7 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getCurrentPid(): int
     {
-        return (int)self::getTypoScriptFrontendController()->id;
+        return (int)$GLOBALS['TSFE']->id;
     }
 
     /**
@@ -43,7 +43,7 @@ class FrontendUtility extends AbstractUtility
 
     public static function getCharset(): string
     {
-        return self::getTypoScriptFrontendController()->metaCharset;
+        return $GLOBALS['TSFE']->metaCharset;
     }
 
     /**

@@ -51,8 +51,8 @@ class UserUtility extends AbstractUtility
      */
     public static function getPropertyFromUser($propertyName = 'uid')
     {
-        if (!empty(self::getTypoScriptFrontendController()->fe_user->user[$propertyName])) {
-            return self::getTypoScriptFrontendController()->fe_user->user[$propertyName];
+        if (!empty($GLOBALS['TSFE']->fe_user->user[$propertyName])) {
+            return $GLOBALS['TSFE']->fe_user->user[$propertyName];
         }
 
         return null;

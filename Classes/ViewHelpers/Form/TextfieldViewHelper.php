@@ -53,10 +53,15 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-        $value = $contentObject->cObjGetSingle(
-            $prefillTypoScript[$this->arguments['property']],
-            $prefillTypoScript[$this->arguments['property'] . '.']
-        );
+        if (!empty($prefillTypoScript[$this->arguments['property']]) && !empty($prefillTypoScript[$this->arguments['property'] . '.'])) {
+            $value = $contentObject->cObjGetSingle(
+                $prefillTypoScript[$this->arguments['property']],
+                $prefillTypoScript[$this->arguments['property'] . '.']
+            );
+        } else {
+            $value = '';
+        }
+
         return $value;
     }
 }
