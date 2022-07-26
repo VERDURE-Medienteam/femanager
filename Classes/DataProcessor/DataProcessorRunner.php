@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\DataProcessor;
 
 use In2code\Femanager\Utility\FrontendUtility;
@@ -79,7 +80,7 @@ class DataProcessorRunner
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
                 $dataProcessor = ObjectUtility::getObjectManager()->get(
                     $class,
-                    (array)$configuration['config'],
+                    isset($configuration['config']) ? (array)$configuration['config'] : [],
                     $settings,
                     $contentObject,
                     $controllerArguments

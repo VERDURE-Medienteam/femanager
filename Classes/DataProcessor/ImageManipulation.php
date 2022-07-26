@@ -25,7 +25,7 @@ class ImageManipulation extends AbstractDataProcessor
         foreach ($this->getPropertiesForUpload() as $property) {
             if ($this->isFileIdentifierGiven($arguments, $property) || $this->isUploadError($arguments, $property)) {
                 unset($arguments['user'][$property]);
-            } else {
+            } elseif (isset($arguments['user'][$property])) {
                 // file upload given
                 foreach ((array)$arguments['user'][$property] as $fileItem) {
                     /** @noinspection PhpMethodParametersCountMismatchInspection */

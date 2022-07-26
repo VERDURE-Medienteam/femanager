@@ -205,8 +205,8 @@ abstract class AbstractController extends ActionController
                 $this->settings['new']['email']['createUserNotify']['sender']['name']['value']
             ),
             $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserNotify.']['subject'],
-                $this->config['new.']['email.']['createUserNotify.']['subject.']
+                $this->config['new.']['email.']['createUserNotify.']['subject'] ?? '',
+                $this->config['new.']['email.']['createUserNotify.']['subject.'] ?? []
             ),
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
@@ -223,8 +223,8 @@ abstract class AbstractController extends ActionController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    $this->config['new.']['email.']['createAdminNotify.']['subject'],
-                    $this->config['new.']['email.']['createAdminNotify.']['subject.']
+                    $this->config['new.']['email.']['createAdminNotify.']['subject'] ?? '',
+                    $this->config['new.']['email.']['createAdminNotify.']['subject.'] ?? []
                 ),
                 $variables,
                 $this->config['new.']['email.']['createAdminNotify.']
@@ -273,14 +273,14 @@ abstract class AbstractController extends ActionController
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
-            $this->config[$action . '.'][$category],
-            $this->config[$action . '.'][$category . '.']
+            $this->config[$action . '.'][$category] ?? '',
+            $this->config[$action . '.'][$category . '.'] ?? []
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                $this->config[$action . '.'][$category],
+                $this->config[$action . '.'][$category] ?? '',
                 array_merge_recursive(
-                    $this->config[$action . '.'][$category . '.'],
+                    $this->config[$action . '.'][$category . '.'] ?? [],
                     [
                         'linkAccessRestrictedPages' => 1
                     ]
@@ -473,8 +473,8 @@ abstract class AbstractController extends ActionController
                     $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
             ],
             $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserConfirmation.']['subject'],
-                $this->config['new.']['email.']['createUserConfirmation.']['subject.']
+                $this->config['new.']['email.']['createUserConfirmation.']['subject'] ?? '',
+                $this->config['new.']['email.']['createUserConfirmation.']['subject.'] ?? []
             ),
             [
                 'user' => $user,

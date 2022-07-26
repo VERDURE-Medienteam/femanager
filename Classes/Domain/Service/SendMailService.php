@@ -99,7 +99,7 @@ class SendMailService
 
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
-        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']);
+        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'] ?? '', $typoScript['embedImage.'] ?? []);
 
         if (!$images) {
             return $variables;
@@ -137,16 +137,16 @@ class SendMailService
 
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['receiver.']['email'], $typoScript['receiver.']['email.'])
-            && $this->contentObject->cObjGetSingle($typoScript['receiver.']['name'], $typoScript['receiver.']['name.'])
+        if ($this->contentObject->cObjGetSingle($typoScript['receiver.']['email'] ?? '', $typoScript['receiver.']['email.'] ?? [])
+            && $this->contentObject->cObjGetSingle($typoScript['receiver.']['name'] ?? '', $typoScript['receiver.']['name.'] ?? [])
         ) {
             $emailAddress = $this->contentObject->cObjGetSingle(
-                $typoScript['receiver.']['email'],
-                $typoScript['receiver.']['email.']
+                $typoScript['receiver.']['email'] ?? '',
+                $typoScript['receiver.']['email.'] ?? []
             );
             $name = $this->contentObject->cObjGetSingle(
-                $typoScript['receiver.']['name'],
-                $typoScript['receiver.']['name.']
+                $typoScript['receiver.']['name'] ?? '',
+                $typoScript['receiver.']['name.'] ?? []
             );
             $email->setTo([$emailAddress => $name]);
         }
@@ -154,16 +154,16 @@ class SendMailService
 
     protected function overwriteEmailSender(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['sender.']['email'], $typoScript['sender.']['email.']) &&
-            $this->contentObject->cObjGetSingle($typoScript['sender.']['name'], $typoScript['sender.']['name.'])
+        if ($this->contentObject->cObjGetSingle($typoScript['sender.']['email'] ?? '', $typoScript['sender.']['email.'] ?? []) &&
+            $this->contentObject->cObjGetSingle($typoScript['sender.']['name'] ?? '', $typoScript['sender.']['name.'] ?? [])
         ) {
             $emailAddress = $this->contentObject->cObjGetSingle(
-                $typoScript['sender.']['email'],
-                $typoScript['sender.']['email.']
+                $typoScript['sender.']['email'] ?? '',
+                $typoScript['sender.']['email.'] ?? []
             );
             $name = $this->contentObject->cObjGetSingle(
-                $typoScript['sender.']['name'],
-                $typoScript['sender.']['name.']
+                $typoScript['sender.']['name'] ?? '',
+                $typoScript['sender.']['name.'] ?? []
             );
             $email->setFrom([$emailAddress => $name]);
         }
@@ -171,31 +171,31 @@ class SendMailService
 
     protected function setSubject(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.'])) {
-            $email->setSubject($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.']));
+        if ($this->contentObject->cObjGetSingle($typoScript['subject'] ?? '', $typoScript['subject.'] ?? [])) {
+            $email->setSubject($this->contentObject->cObjGetSingle($typoScript['subject'] ?? '', $typoScript['subject.'] ?? []));
         }
     }
 
     protected function setCc(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
-            $email->setCc($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']));
+        if ($this->contentObject->cObjGetSingle($typoScript['cc'] ?? '', $typoScript['cc.'] ?? [])) {
+            $email->setCc($this->contentObject->cObjGetSingle($typoScript['cc'] ?? '', $typoScript['cc.'] ?? []));
         }
     }
 
     protected function setPriority(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])) {
-            $email->priority((int)$this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.']));
+        if ($this->contentObject->cObjGetSingle($typoScript['priority'] ?? '', $typoScript['priority.'] ?? [])) {
+            $email->priority((int)$this->contentObject->cObjGetSingle($typoScript['priority'] ?? '', $typoScript['priority.'] ?? []));
         }
     }
 
     protected function setAttachments(array $typoScript, MailMessage $email)
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.'])) {
+        if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? [])) {
             $files = GeneralUtility::trimExplode(
                 ',',
-                $this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.']),
+                $this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? []),
                 true
             );
             foreach ($files as $file) {
@@ -217,7 +217,7 @@ class SendMailService
 
     protected function isMailEnabled(array $typoScript, array $receiver): bool
     {
-        return $this->contentObject->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])
+        return $this->contentObject->cObjGetSingle($typoScript['_enable'] ?? '', $typoScript['_enable.'] ?? [])
             && count($receiver) > 0;
     }
 }

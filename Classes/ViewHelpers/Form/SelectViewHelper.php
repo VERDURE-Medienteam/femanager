@@ -74,8 +74,8 @@ class SelectViewHelper extends OriginalSelectViewHelper
                 $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
             if (!empty($prefillTypoScript[$this->getFieldName()])) {
                 $selectedValue = $contentObject->cObjGetSingle(
-                    $prefillTypoScript[$this->getFieldName()],
-                    $prefillTypoScript[$this->getFieldName() . '.']
+                    $prefillTypoScript[$this->getFieldName()] ?? '',
+                    $prefillTypoScript[$this->getFieldName() . '.'] ?? []
                 );
             }
         }

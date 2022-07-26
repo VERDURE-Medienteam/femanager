@@ -118,8 +118,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
         foreach ($this->configuration[$table] as $field => $value) {
             if (!$this->isSkippedKey($field)) {
                 $value = $this->contentObject->cObjGetSingle(
-                    $this->configuration[$table][$field],
-                    $this->configuration[$table][$field . '.']
+                    $this->configuration[$table][$field] ?? '',
+                    $this->configuration[$table][$field . '.'] ?? []
                 );
                 $storeInDatabase->addProperty($field, $value);
             }
@@ -135,8 +135,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     protected function isTableEnabled($table)
     {
         return $this->contentObject->cObjGetSingle(
-            $this->configuration[$table]['_enable'],
-            $this->configuration[$table]['_enable.']
+            $this->configuration[$table]['_enable'] ?? '',
+            $this->configuration[$table]['_enable.'] ?? []
         ) === '1';
     }
 

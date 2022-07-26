@@ -72,7 +72,7 @@ class FrontendUtility extends AbstractUtility
                 continue;
             }
             // value to set
-            $value = self::getContentObject()->cObjGetSingle($settings[$field], $settings[$field . '.']);
+            $value = self::getContentObject()->cObjGetSingle($settings[$field] ?? '', $settings[$field . '.'] ?? []);
             self::forceValue($user, $field, $value);
         }
         return $user;

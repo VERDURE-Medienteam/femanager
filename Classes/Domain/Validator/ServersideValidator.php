@@ -320,7 +320,7 @@ class ServersideValidator extends AbstractValidator
                     return true;
                 }
 
-                if (method_exists($current, 'getUid')) {
+                if ($current !== null && method_exists($current, 'getUid')) {
                     $value = $current->getUid();
                 }
             }
