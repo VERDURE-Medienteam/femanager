@@ -52,8 +52,8 @@ class FinisherRunner
             /** @var FinisherService $finisherService */
             $finisherService = $this->objectManager->get(FinisherService::class, $user, $settings, $contentObject);
             $finisherService->setClass($finisherSettings['class']);
-            $finisherService->setRequirePath(isset($finisherSettings['require']) ? (string)$finisherSettings['require'] : '');
-            $finisherService->setConfiguration(isset($finisherSettings['config']) ? (array)$finisherSettings['config'] : []);
+            $finisherService->setRequirePath((string)($finisherSettings['require'] ?? ''));
+            $finisherService->setConfiguration((array)($finisherSettings['config'] ?? []));
             $finisherService->setActionMethodName($actionMethodName);
             $finisherService->start();
         }

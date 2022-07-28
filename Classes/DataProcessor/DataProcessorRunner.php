@@ -80,7 +80,7 @@ class DataProcessorRunner
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
                 $dataProcessor = ObjectUtility::getObjectManager()->get(
                     $class,
-                    isset($configuration['config']) ? (array)$configuration['config'] : [],
+                    (array)($configuration['config'] ?? []),
                     $settings,
                     $contentObject,
                     $controllerArguments
