@@ -12,7 +12,9 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ConfigurationUtility extends AbstractUtility
 {
-
+    /**
+     * @return bool
+     */
     public static function isDisableModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();

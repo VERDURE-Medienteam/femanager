@@ -20,7 +20,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class UserController extends AbstractFrontendController
 {
-
+    /**
+     * @param array $filter
+     */
     public function listAction(array $filter = []): ResponseInterface
     {
         $this->view->assignMultiple(
@@ -49,6 +51,9 @@ class UserController extends AbstractFrontendController
         $this->request->setArguments($arguments);
     }
 
+    /**
+     * @param User $user
+     */
     public function showAction(User $user = null): ResponseInterface
     {
         $this->view->assign('user', $this->getUser($user));
@@ -57,6 +62,7 @@ class UserController extends AbstractFrontendController
     }
 
     /**
+     * @param User $user
      * @throws \Exception
      */
     public function imageDeleteAction(User $user)
@@ -118,6 +124,7 @@ class UserController extends AbstractFrontendController
     /**
      * Simulate frontenduser login for backend adminstrators only
      *
+     * @param User $user
      * @throws UnauthorizedException
      */
     public function loginAsAction(User $user)
@@ -133,6 +140,7 @@ class UserController extends AbstractFrontendController
     }
 
     /**
+     * @param User $user
      * @return User
      */
     protected function getUser(User $user = null)

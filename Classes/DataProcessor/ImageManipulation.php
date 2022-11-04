@@ -18,7 +18,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ImageManipulation extends AbstractDataProcessor
 {
-
+    /**
+     * @param array $arguments
+     * @return array
+     */
     public function process(array $arguments): array
     {
         $this->allowImageProperties();

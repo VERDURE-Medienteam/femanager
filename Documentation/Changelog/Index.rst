@@ -8,6 +8,15 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.0.1
+      :Date: 2022-10-31
+      :Changes:
+
+      * [BUGFIX] (!!!) Security Fix - Broken Access Control in Usergroup Validation (Andreas Nedbal - in2code) - thx to TYPO3 Security Team
+      * [BUGFIX] login after registration (Re-fetch session from database to update 'userSession' property of TSFE) - thx to Thomas Off
+      * [BUGFIX] CleanUserGroup DataProcessor - thx to Daniel Hoffmann (in2code)
+
+-
       :Version: 7.0.0
       :Date: 2022-07-11
       :Changes:

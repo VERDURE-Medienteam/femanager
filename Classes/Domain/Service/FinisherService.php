@@ -15,7 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class FinisherService
 {
-
     /**
      * Classname
      *
