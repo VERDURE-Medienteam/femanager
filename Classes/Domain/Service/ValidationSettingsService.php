@@ -11,7 +11,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ValidationSettingsService
 {
-
     /**
      * Validation names with simple configuration
      *

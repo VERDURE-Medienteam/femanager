@@ -25,7 +25,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 class UserUtility extends AbstractUtility
 {
-
     /**
      * Return current logged in fe_user
      *
@@ -333,6 +332,8 @@ class UserUtility extends AbstractUtility
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
         // create the session (destroys all existing session data in the session backend!)
         $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
+        // re-fetch the session from the database so that the internal 'userSession' property of TSFE gets updated
+        $GLOBALS['TSFE']->fe_user->fetchUserSession();
         // write the session data again to the session backend; preserves what was there before!!
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
     }

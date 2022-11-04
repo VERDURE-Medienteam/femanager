@@ -16,7 +16,9 @@ use TYPO3\CMS\Core\Utility\RootlineUtility;
  */
 class BackendUtility
 {
-
+    /**
+     * @return int
+     */
     public static function getPageIdentifier(): int
     {
         return (int)GeneralUtility::_GET('id');

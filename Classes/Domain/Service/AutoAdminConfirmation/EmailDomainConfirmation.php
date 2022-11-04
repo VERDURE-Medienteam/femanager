@@ -10,7 +10,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailDomainConfirmation extends AbstractConfirmation
 {
-
+    /**
+     * @return bool
+     */
     public function isAutoConfirmed(): bool
     {
         if (!$this->isException() && $this->isGivenDomainsPartOfEmail()) {
