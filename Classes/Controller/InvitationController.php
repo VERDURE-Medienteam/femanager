@@ -157,7 +157,7 @@ class InvitationController extends AbstractFrontendController
     /**
      * action update
      *
-     * @param User $user
+     * @param \In2code\Femanager\Domain\Model\User $user
      * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      */
