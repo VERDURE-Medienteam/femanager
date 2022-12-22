@@ -46,7 +46,7 @@ class ValidationSettingsService
     public function getValidationStringForField(string $fieldName): string
     {
         $string = '';
-        $validationSettings = isset($this->getSettings()[$this->controllerName][$this->validationName][$fieldName]) ?? null;
+        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName] ?? null;
         if (is_array($validationSettings)) {
             foreach ($validationSettings as $validation => $configuration) {
                 if (!empty($string)) {
