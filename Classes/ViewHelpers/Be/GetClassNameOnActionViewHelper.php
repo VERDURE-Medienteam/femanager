@@ -16,7 +16,6 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
     /**
      * Return className if actionName fits to current action
      *
-     * @return string
      * @throws FluidViewHelperException
      */
     public function render(): string

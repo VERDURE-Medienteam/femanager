@@ -294,7 +294,7 @@ class ClientsideValidator extends AbstractValidator
     protected function getValidationSettings(): array
     {
         $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
-        $validationSettings = str_replace('|', ',', (string) $validationSettings);
+        $validationSettings = str_replace('|', ',', $validationSettings);
 
         return $validationSettings;
     }
